@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useRef, useState } from 'react'
-import { Check, Upload } from 'lucide-react'
+import { useState } from 'react'
+import { Check } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 export function ImagePicker({
   name,
   defaultValue,
-  library: initialLibrary,
+  library,
   label = 'Image',
 }: {
   name: string
@@ -19,24 +19,6 @@ export function ImagePicker({
   label?: string
 }) {
   const [value, setValue] = useState(defaultValue)
-  const [library, setLibrary] = useState(initialLibrary)
-  const [uploading, setUploading] = useState(false)
-  const [uploadError, setUploadError] = useState('')
-  const fileRef = useRef<HTMLInputElement>(null)
-
-  async function upload(file?: File) {
-    if (!file) return
-    setUploading(true)
-    setUploadError('')
-    const fd = new FormData()
-    fd.set('file', file)
-    const r = await fetch('/api/admin/upload', { method: 'POST', body: fd })
-    const data = await r.json()
-    setUploading(false)
-    if (!r.ok) return setUploadError(data.error)
-    setLibrary((l) => [data.src, ...l])
-    setValue(data.src)
-  }
   const inputId = `${name}-url`
 
   return (
@@ -77,18 +59,6 @@ export function ImagePicker({
                 </button>
               )
             })}
-          </div>
-          <div className="flex items-center gap-3">
-            <input ref={fileRef} type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden onChange={(e) => upload(e.target.files?.[0])} />
-            <button
-              type="button"
-              onClick={() => fileRef.current?.click()}
-              disabled={uploading}
-              className="inline-flex h-8 items-center gap-2 rounded-lg border border-border px-3 text-sm hover:bg-muted disabled:opacity-50"
-            >
-              <Upload className="size-4" /> {uploading ? 'Uploading…' : 'Upload new image'}
-            </button>
-            {uploadError && <p role="alert" className="text-xs text-destructive">{uploadError}</p>}
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor={inputId} className="text-xs text-muted-foreground">

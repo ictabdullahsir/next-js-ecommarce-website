@@ -2,37 +2,59 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { connection } from 'next/server'
 import type { CategorySlug, Store } from '@/lib/products'
-import { getDb } from '@/lib/mongo'
 import { seedStore } from '@/lib/seed-data'
+import { isPostLive, sortPostsByDate } from '@/lib/blog'
 
-// The catalog, site content, coupons, pages, settings and navigation live in one
-// MongoDB document (collection "store", _id "main"). It is created from
-// lib/seed-data.ts the first time the site runs. Orders have their own collection.
-const col = async () => (await getDb()).collection<{ _id: string } & Partial<Store>>('store')
+const STORE_FILE = path.join(process.cwd(), 'data', 'store.json')
+
+// Fallback for read-only filesystems (e.g. serverless deployments), where edits
+// only live for the lifetime of the running instance.
+let memoryStore: Store | null = null
 
 export async function getStore(): Promise<Store> {
   await connection()
-  const c = await col()
-  const doc = await c.findOne({ _id: 'main' })
-  const base = structuredClone(seedStore)
-  if (!doc) {
-    await c.insertOne({ _id: 'main', ...base })
-    return base
+  if (memoryStore) return memoryStore
+  try {
+    const raw = await fs.readFile(STORE_FILE, 'utf8')
+    return withDefaults(JSON.parse(raw) as Partial<Store>)
+  } catch {
+    return structuredClone(seedStore)
   }
-  const { _id, ...saved } = doc
-  void _id
+}
+
+// Older store files were saved before the blog existed, so fill in missing sections.
+function withDefaults(store: Partial<Store>): Store {
+  const seed = structuredClone(seedStore)
   return {
-    ...base,
-    ...saved,
-    content: { ...base.content, ...saved.content },
-    settings: { ...base.settings, ...saved.settings },
-    nav: { ...base.nav, ...saved.nav },
-  } as Store
+    ...seed,
+    ...store,
+    posts: store.posts ?? seed.posts,
+    blog: { ...seed.blog, ...store.blog },
+  }
+}
+
+export async function getBlogSettings() {
+  return (await getStore()).blog
+}
+
+export async function getLivePosts() {
+  const { posts } = await getStore()
+  return sortPostsByDate(posts.filter(isPostLive))
+}
+
+export async function getPost(slug: string, { includeDrafts = false } = {}) {
+  const { posts } = await getStore()
+  return posts.find((p) => p.slug === slug && (includeDrafts || isPostLive(p)))
 }
 
 export async function saveStore(store: Store) {
-  const c = await col()
-  await c.replaceOne({ _id: 'main' }, { _id: 'main', ...store }, { upsert: true })
+  memoryStore = store
+  try {
+    await fs.mkdir(path.dirname(STORE_FILE), { recursive: true })
+    await fs.writeFile(STORE_FILE, JSON.stringify(store, null, 2), 'utf8')
+  } catch (error) {
+    console.error('Could not persist store to disk, keeping changes in memory.', error)
+  }
 }
 
 export async function getContent() {

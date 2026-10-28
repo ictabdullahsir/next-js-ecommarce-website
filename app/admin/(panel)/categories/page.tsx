@@ -10,13 +10,12 @@ export default async function CategoriesPage() {
     <>
       <AdminPageHeader
         title="Categories"
-        description="Add, edit and remove the collections shown on your homepage and in the shop."
+        description="Edit the name, tagline and cover image for each collection."
       />
       <div className="flex flex-col gap-6">
         {categories.map((c) => (
           <CategoryForm key={c.slug} category={c} library={library} />
         ))}
-        <CategoryForm library={library} />
       </div>
     </>
   )

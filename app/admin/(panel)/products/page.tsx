@@ -109,11 +109,6 @@ export default async function ProductsPage({ searchParams }: Props) {
                   <div className="flex gap-1.5">
                     {p.published ? <Badge>Published</Badge> : <Badge variant="outline">Draft</Badge>}
                     {p.isNew && <Badge variant="secondary">New</Badge>}
-                    {p.stock !== undefined && (
-                      <Badge variant={p.stock === 0 ? 'destructive' : 'outline'}>
-                        {p.stock === 0 ? 'Sold out' : `${p.stock} in stock`}
-                      </Badge>
-                    )}
                   </div>
                 </TableCell>
                 <TableCell className="pr-4 text-right">

@@ -7,18 +7,19 @@ import { Menu, ShoppingBag, X } from 'lucide-react'
 import { useCart } from '@/components/cart-provider'
 import { cn } from '@/lib/utils'
 
-export function SiteHeader({
-  announcement,
-  links: nav,
-  storeName,
-}: {
-  announcement: string
-  links: { label: string; href: string }[]
-  storeName: string
-}) {
+const nav = [
+  { href: '/shop/men', label: 'Men' },
+  { href: '/shop/women', label: 'Women' },
+  { href: '/shop/kids', label: 'Kids' },
+  { href: '/shop', label: 'Shop All' },
+]
+
+export function SiteHeader({ announcement, blogLabel }: { announcement: string; blogLabel?: string }) {
   const pathname = usePathname()
   const { count } = useCart()
   const [open, setOpen] = useState(false)
+  const items = blogLabel ? [...nav, { href: '/blog', label: blogLabel }] : nav
+  const isActive = (href: string) => pathname === href || (href === '/blog' && pathname.startsWith('/blog/'))
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
@@ -39,17 +40,17 @@ export function SiteHeader({
         </button>
 
         <Link href="/" className="font-serif text-2xl font-semibold tracking-tight">
-          {storeName}
+          LOOM
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
-          {nav.map((item) => (
+          {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
                 'text-sm transition-colors hover:text-foreground',
-                pathname === item.href ? 'font-medium text-foreground' : 'text-muted-foreground',
+                isActive(item.href) ? 'font-medium text-foreground' : 'text-muted-foreground',
               )}
             >
               {item.label}
@@ -74,7 +75,7 @@ export function SiteHeader({
       {open && (
         <nav aria-label="Mobile" className="border-t border-border md:hidden">
           <ul className="flex flex-col px-4 py-2">
-            {nav.map((item) => (
+            {items.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}

@@ -4,12 +4,13 @@ import { SiteFooter } from '@/components/site-footer'
 import { getStore } from '@/lib/store'
 
 export default async function ShopLayout({ children }: { children: React.ReactNode }) {
-  const { content, nav, settings } = await getStore()
+  const { content, blog } = await getStore()
+  const blogLabel = blog.enabled ? blog.title : undefined
   return (
     <CartProvider>
-      <SiteHeader announcement={content.announcement} links={nav.header} storeName={settings.storeName} />
+      <SiteHeader announcement={content.announcement} blogLabel={blog.showInNav ? blogLabel : undefined} />
       <main>{children}</main>
-      <SiteFooter tagline={content.footerTagline} columns={nav.footer} settings={settings} />
+      <SiteFooter tagline={content.footerTagline} blogLabel={blogLabel} />
     </CartProvider>
   )
 }

@@ -1,4 +1,5 @@
 import type { Store } from '@/lib/products'
+import { seedBlogSettings, seedPosts } from '@/lib/blog-seed'
 
 const adultSizes = ['XS', 'S', 'M', 'L', 'XL']
 const kidsSizes = ['2Y', '4Y', '6Y', '8Y', '10Y']
@@ -208,57 +209,6 @@ export const seedStore: Store = {
     footerTagline:
       'Considered clothing for the whole family. Made from natural materials, designed to last.',
   },
-  coupons: [{ code: 'WELCOME10', type: 'percent', value: 10, used: 0, active: true }],
-  pages: [
-    {
-      slug: 'shipping-returns',
-      title: 'Shipping & Returns',
-      content:
-        '## Shipping\n\nOrders ship within 2 business days. Shipping is free over the threshold shown at checkout.\n\n## Returns\n\nReturn unworn items within 30 days for a full refund.',
-      published: true,
-    },
-    {
-      slug: 'contact',
-      title: 'Contact',
-      content: 'Questions about an order? Email us and we will reply within one business day.',
-      published: true,
-    },
-  ],
-  settings: {
-    storeName: 'LOOM',
-    email: 'hello@loom.example',
-    phone: '',
-    address: '',
-    instagram: '',
-    facebook: '',
-    shippingFee: 8,
-    freeShippingThreshold: 100,
-  },
-  nav: {
-    header: [
-      { label: 'Men', href: '/shop/men' },
-      { label: 'Women', href: '/shop/women' },
-      { label: 'Kids', href: '/shop/kids' },
-      { label: 'Shop All', href: '/shop' },
-    ],
-    footer: [
-      {
-        title: 'Shop',
-        links: [
-          { label: 'Men', href: '/shop/men' },
-          { label: 'Women', href: '/shop/women' },
-          { label: 'Kids', href: '/shop/kids' },
-          { label: 'All Products', href: '/shop' },
-        ],
-      },
-      {
-        title: 'Help',
-        links: [
-          { label: 'Shopping Bag', href: '/cart' },
-          { label: 'Shipping & Returns', href: '/pages/shipping-returns' },
-          { label: 'Contact', href: '/pages/contact' },
-        ],
-      },
-    ],
-  },
+  posts: seedPosts,
+  blog: seedBlogSettings,
 }

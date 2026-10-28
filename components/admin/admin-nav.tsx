@@ -2,36 +2,16 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {
-  ExternalLink,
-  FileText,
-  ImageIcon,
-  LayoutDashboard,
-  LayoutGrid,
-  Link2,
-  LogOut,
-  Newspaper,
-  Settings,
-  Shirt,
-  ShoppingCart,
-  Ticket,
-  Users,
-} from 'lucide-react'
+import { ExternalLink, FileText, LayoutDashboard, LayoutGrid, LogOut, Newspaper, Shirt } from 'lucide-react'
 import { logout } from '@/app/admin/actions'
 import { cn } from '@/lib/utils'
 
 const links = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/orders', label: 'Orders', icon: ShoppingCart },
   { href: '/admin/products', label: 'Products', icon: Shirt },
   { href: '/admin/categories', label: 'Categories', icon: LayoutGrid },
-  { href: '/admin/customers', label: 'Customers', icon: Users },
-  { href: '/admin/coupons', label: 'Coupons', icon: Ticket },
+  { href: '/admin/blog', label: 'Blog', icon: Newspaper },
   { href: '/admin/content', label: 'Site Content', icon: FileText },
-  { href: '/admin/pages', label: 'Pages', icon: Newspaper },
-  { href: '/admin/navigation', label: 'Navigation', icon: Link2 },
-  { href: '/admin/media', label: 'Media', icon: ImageIcon },
-  { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 
 export function AdminNav() {

@@ -1,4 +1,7 @@
-export type CategorySlug = string
+import type { BlogPost, BlogSettings } from '@/lib/blog'
+
+export const CATEGORY_SLUGS = ['men', 'women', 'kids'] as const
+export type CategorySlug = (typeof CATEGORY_SLUGS)[number]
 
 export type Category = {
   slug: CategorySlug
@@ -20,8 +23,6 @@ export type Product = {
   colors: string[]
   isNew?: boolean
   published: boolean
-  /** Units in stock. Leave undefined for unlimited. */
-  stock?: number
 }
 
 export type Perk = { title: string; text: string }
@@ -41,51 +42,16 @@ export type SiteContent = {
   footerTagline: string
 }
 
-export type NavLink = { label: string; href: string }
-export type FooterColumn = { title: string; links: NavLink[] }
-
-export type Coupon = {
-  code: string
-  type: 'percent' | 'fixed'
-  value: number
-  minSubtotal?: number
-  maxUses?: number
-  used: number
-  expiresAt?: string
-  active: boolean
-}
-
-export type CmsPage = {
-  slug: string
-  title: string
-  content: string
-  seoDescription?: string
-  published: boolean
-}
-
-export type Settings = {
-  storeName: string
-  email: string
-  phone: string
-  address: string
-  instagram: string
-  facebook: string
-  shippingFee: number
-  freeShippingThreshold: number
-}
-
 export type Store = {
   categories: Category[]
   products: Product[]
   content: SiteContent
-  coupons: Coupon[]
-  pages: CmsPage[]
-  settings: Settings
-  nav: { header: NavLink[]; footer: FooterColumn[] }
+  posts: BlogPost[]
+  blog: BlogSettings
 }
 
-export function isCategorySlug(value: string) {
-  return /^[a-z0-9-]{1,40}$/.test(value)
+export function isCategorySlug(value: string): value is CategorySlug {
+  return (CATEGORY_SLUGS as readonly string[]).includes(value)
 }
 
 export function slugify(value: string) {

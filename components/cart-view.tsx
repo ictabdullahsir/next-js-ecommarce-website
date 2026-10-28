@@ -5,54 +5,22 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Minus, Plus, X } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { placeOrder, previewCoupon } from '@/app/(shop)/actions'
 import { itemKey, useCart } from '@/components/cart-provider'
 import { formatPrice } from '@/lib/products'
 
-type Props = { shippingFee: number; freeShipping: number; categories: { slug: string; name: string }[] }
+const FREE_SHIPPING = 100
+const SHIPPING_FEE = 8
 
-const emptyCustomer = { name: '', email: '', phone: '', address: '', city: '', postalCode: '' }
-
-export function CartView({ shippingFee, freeShipping, categories }: Props) {
+export function CartView() {
   const { items, subtotal, update, remove, clear } = useCart()
-  const [placed, setPlaced] = useState<string | null>(null)
-  const [customer, setCustomer] = useState(emptyCustomer)
-  const [note, setNote] = useState('')
-  const [code, setCode] = useState('')
-  const [applied, setApplied] = useState<{ code: string; discount: number } | null>(null)
-  const [error, setError] = useState('')
-  const [busy, setBusy] = useState(false)
-  const lines = items.map((i) => ({ slug: i.slug, size: i.size, color: i.color, quantity: i.quantity }))
-
-  async function applyCoupon() {
-    setError('')
-    const r = await previewCoupon(code, lines)
-    if ('error' in r && r.error) {
-      setApplied(null)
-      setError(r.error)
-    } else if ('code' in r) setApplied({ code: r.code, discount: r.discount })
-  }
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault()
-    setBusy(true)
-    setError('')
-    const r = await placeOrder({ lines, couponCode: applied?.code, customer, note })
-    setBusy(false)
-    if ('error' in r) return setError(r.error)
-    clear()
-    setPlaced(r.number)
-  }
+  const [placed, setPlaced] = useState(false)
 
   if (placed) {
     return (
       <div className="mx-auto max-w-md py-16 text-center">
         <h2 className="font-serif text-3xl">Thank you for your order</h2>
         <p className="mt-3 text-muted-foreground">
-          Your order number is <strong className="text-foreground">{placed}</strong>. Pay with cash when it
-          arrives. We will contact you to confirm delivery.
+          This is a demo store, so no payment was taken. Your bag has been cleared.
         </p>
         <Link href="/shop" className={buttonVariants({ className: 'mt-8 h-11 px-6' })}>
           Continue shopping
@@ -67,13 +35,13 @@ export function CartView({ shippingFee, freeShipping, categories }: Props) {
         <h2 className="font-serif text-3xl">Your bag is empty</h2>
         <p className="mt-3 text-muted-foreground">Discover something you&apos;ll love.</p>
         <div className="mt-8 flex justify-center gap-3">
-          {categories.map((c) => (
+          {['men', 'women', 'kids'].map((c) => (
             <Link
-              key={c.slug}
-              href={`/shop/${c.slug}`}
-              className={buttonVariants({ variant: 'outline', className: 'h-11 px-5' })}
+              key={c}
+              href={`/shop/${c}`}
+              className={buttonVariants({ variant: 'outline', className: 'h-11 px-5 capitalize' })}
             >
-              {c.name}
+              {c}
             </Link>
           ))}
         </div>
@@ -81,9 +49,8 @@ export function CartView({ shippingFee, freeShipping, categories }: Props) {
     )
   }
 
-  const discount = applied?.discount ?? 0
-  const shipping = subtotal - discount >= freeShipping ? 0 : shippingFee
-  const total = subtotal - discount + shipping
+  const shipping = subtotal >= FREE_SHIPPING ? 0 : SHIPPING_FEE
+  const total = subtotal + shipping
 
   return (
     <div className="mt-8 flex flex-col gap-12 lg:flex-row">
@@ -153,7 +120,7 @@ export function CartView({ shippingFee, freeShipping, categories }: Props) {
         })}
       </ul>
 
-      <form onSubmit={submit} className="h-fit w-full rounded-lg bg-secondary p-6 lg:w-96">
+      <aside className="h-fit w-full rounded-lg bg-secondary p-6 lg:w-96">
         <h2 className="text-lg font-semibold">Order Summary</h2>
         <dl className="mt-6 flex flex-col gap-3 text-sm">
           <div className="flex justify-between">
@@ -164,15 +131,9 @@ export function CartView({ shippingFee, freeShipping, categories }: Props) {
             <dt className="text-muted-foreground">Shipping</dt>
             <dd>{shipping === 0 ? 'Free' : formatPrice(shipping)}</dd>
           </div>
-          {discount > 0 && (
-            <div className="flex justify-between text-primary">
-              <dt>Coupon {applied?.code}</dt>
-              <dd>-{formatPrice(discount)}</dd>
-            </div>
-          )}
           {shipping > 0 && (
             <p className="text-xs text-muted-foreground">
-              Add {formatPrice(Math.max(0, freeShipping - (subtotal - discount)))} more for free shipping.
+              Add {formatPrice(FREE_SHIPPING - subtotal)} more for free shipping.
             </p>
           )}
           <div className="flex justify-between border-t border-border pt-3 text-base font-semibold">
@@ -180,57 +141,19 @@ export function CartView({ shippingFee, freeShipping, categories }: Props) {
             <dd>{formatPrice(total)}</dd>
           </div>
         </dl>
-        <div className="mt-6 flex gap-2">
-          <Input
-            aria-label="Coupon code"
-            placeholder="Coupon code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <Button type="button" variant="outline" onClick={applyCoupon} disabled={!code.trim()}>
-            Apply
-          </Button>
-        </div>
-
-        <h3 className="mt-8 text-sm font-semibold">Delivery details</h3>
-        <div className="mt-3 flex flex-col gap-3">
-          {(
-            [
-              ['name', 'Full name', 'text'],
-              ['email', 'Email', 'email'],
-              ['phone', 'Phone', 'tel'],
-              ['address', 'Street address', 'text'],
-              ['city', 'City', 'text'],
-              ['postalCode', 'Postal code (optional)', 'text'],
-            ] as const
-          ).map(([key, label, type]) => (
-            <div key={key} className="flex flex-col gap-1.5">
-              <Label htmlFor={`co-${key}`}>{label}</Label>
-              <Input
-                id={`co-${key}`}
-                type={type}
-                required={key !== 'postalCode'}
-                value={customer[key]}
-                onChange={(e) => setCustomer({ ...customer, [key]: e.target.value })}
-              />
-            </div>
-          ))}
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="co-note">Order note (optional)</Label>
-            <Input id="co-note" value={note} onChange={(e) => setNote(e.target.value)} />
-          </div>
-        </div>
-
-        {error && (
-          <p role="alert" className="mt-4 text-sm text-destructive">
-            {error}
-          </p>
-        )}
-        <Button type="submit" disabled={busy} className="mt-6 h-12 w-full text-base">
-          {busy ? 'Placing order…' : 'Place order'}
+        <Button
+          className="mt-6 h-12 w-full text-base"
+          onClick={() => {
+            clear()
+            setPlaced(true)
+          }}
+        >
+          Checkout
         </Button>
-        <p className="mt-3 text-center text-xs text-muted-foreground">Payment: cash on delivery</p>
-      </form>
+        <p className="mt-3 text-center text-xs text-muted-foreground">
+          Demo checkout &middot; no payment is processed
+        </p>
+      </aside>
     </div>
   )
 }

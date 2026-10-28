@@ -16,11 +16,7 @@ export function AddToCart({ product }: { product: Product }) {
   const [added, setAdded] = useState(false)
   const [error, setError] = useState(false)
 
-  const soldOut = product.stock !== undefined && product.stock <= 0
-  const maxQty = Math.min(10, product.stock ?? 10)
-
   function handleAdd() {
-    if (soldOut) return
     if (!size) {
       setError(true)
       return
@@ -109,15 +105,15 @@ export function AddToCart({ product }: { product: Product }) {
           <button
             type="button"
             className="p-3 disabled:opacity-40"
-            onClick={() => setQty((q) => Math.min(maxQty, q + 1))}
-            disabled={qty >= maxQty}
+            onClick={() => setQty((q) => Math.min(10, q + 1))}
+            disabled={qty >= 10}
             aria-label="Increase quantity"
           >
             <Plus className="size-4" />
           </button>
         </div>
-        <Button onClick={handleAdd} disabled={soldOut} className="h-12 flex-1 text-base">
-          {soldOut ? 'Sold out' : 'Add to Bag'}
+        <Button onClick={handleAdd} className="h-12 flex-1 text-base">
+          Add to Bag
         </Button>
       </div>
 

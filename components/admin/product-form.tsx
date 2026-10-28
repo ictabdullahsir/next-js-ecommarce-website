@@ -125,12 +125,6 @@ export function ProductForm({
             </Field>
           </AdminCard>
 
-          <AdminCard title="Inventory">
-            <Field label="Units in stock" htmlFor="stock" hint="Leave blank for unlimited. Orders reduce this automatically; 0 shows Sold out.">
-              <Input id="stock" name="stock" type="number" min={0} step={1} defaultValue={product?.stock} />
-            </Field>
-          </AdminCard>
-
           <AdminCard title="Pricing">
             <div className="flex flex-col gap-5">
               <Field label="Price (USD)" htmlFor="price">

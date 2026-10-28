@@ -6,7 +6,7 @@ import { ChevronRight, RotateCcw, Truck } from 'lucide-react'
 import { AddToCart } from '@/components/add-to-cart'
 import { ProductCard } from '@/components/product-card'
 import { formatPrice } from '@/lib/products'
-import { getCategory, getProduct, getPublishedProducts, getStore } from '@/lib/store'
+import { getCategory, getProduct, getPublishedProducts } from '@/lib/store'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -25,7 +25,6 @@ export default async function ProductPage({ params }: Props) {
     slug: product.category,
     name: product.category,
   }
-  const { settings } = await getStore()
   const related = (await getPublishedProducts(product.category))
     .filter((p) => p.category === product.category && p.slug !== product.slug)
     .slice(0, 4)
@@ -85,7 +84,7 @@ export default async function ProductPage({ params }: Props) {
 
           <ul className="mt-8 flex flex-col gap-3 border-t border-border pt-6 text-sm text-muted-foreground">
             <li className="flex items-center gap-3">
-              <Truck className="size-4 text-foreground" /> Free shipping on orders over {formatPrice(settings.freeShippingThreshold)}
+              <Truck className="size-4 text-foreground" /> Free shipping on orders over $100
             </li>
             <li className="flex items-center gap-3">
               <RotateCcw className="size-4 text-foreground" /> Free returns within 30 days

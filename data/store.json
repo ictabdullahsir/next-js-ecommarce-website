@@ -1,0 +1,375 @@
+{
+  "categories": [
+    {
+      "slug": "men",
+      "name": "Men",
+      "tagline": "Tailoring, knits and everyday essentials",
+      "image": "/images/cat-men.png"
+    },
+    {
+      "slug": "women",
+      "name": "Women",
+      "tagline": "Effortless dresses, blazers and accessories",
+      "image": "/images/cat-women.png"
+    },
+    {
+      "slug": "kids",
+      "name": "Kids",
+      "tagline": "Soft, durable pieces made for play",
+      "image": "/images/cat-kids.png"
+    }
+  ],
+  "products": [
+    {
+      "slug": "camel-wool-overcoat",
+      "name": "Camel Wool Overcoat",
+      "category": "men",
+      "type": "Outerwear",
+      "price": 240,
+      "compareAt": 300,
+      "image": "/images/p-men-overcoat.png",
+      "description": "A timeless single-breasted overcoat cut from an Italian wool blend. Fully lined with a relaxed shoulder for easy layering over knits.",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Camel",
+        "Charcoal"
+      ],
+      "isNew": true,
+      "published": true
+    },
+    {
+      "slug": "classic-oxford-shirt",
+      "name": "Classic Oxford Shirt",
+      "category": "men",
+      "type": "Shirts",
+      "price": 68,
+      "image": "/images/p-men-oxford.png",
+      "description": "Our everyday oxford in breathable organic cotton, with a button-down collar and a softly tapered fit that works tucked or untucked.",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Sky Blue",
+        "White"
+      ],
+      "published": true
+    },
+    {
+      "slug": "relaxed-chino",
+      "name": "Relaxed Chino",
+      "category": "men",
+      "type": "Trousers",
+      "price": 79,
+      "image": "/images/p-men-chinos.png",
+      "description": "Garment-dyed stretch twill chinos with a relaxed thigh and tapered leg. Broken in from the first wear.",
+      "sizes": [
+        "28",
+        "30",
+        "32",
+        "34",
+        "36"
+      ],
+      "colors": [
+        "Olive",
+        "Stone",
+        "Navy"
+      ],
+      "published": true
+    },
+    {
+      "slug": "leather-court-sneaker",
+      "name": "Leather Court Sneaker",
+      "category": "men",
+      "type": "Shoes",
+      "price": 120,
+      "image": "/images/p-men-sneakers.png",
+      "description": "Minimal low-top sneakers crafted from full-grain leather on a cushioned natural rubber sole.",
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45"
+      ],
+      "colors": [
+        "White"
+      ],
+      "published": true
+    },
+    {
+      "slug": "linen-wrap-dress",
+      "name": "Linen Wrap Dress",
+      "category": "women",
+      "type": "Dresses",
+      "price": 128,
+      "image": "/images/p-women-dress.png",
+      "description": "A flowing midi wrap dress in washed European linen with an adjustable tie waist and fluttered sleeves.",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Terracotta",
+        "Sand"
+      ],
+      "isNew": true,
+      "published": true
+    },
+    {
+      "slug": "oversized-tailored-blazer",
+      "name": "Oversized Tailored Blazer",
+      "category": "women",
+      "type": "Outerwear",
+      "price": 189,
+      "image": "/images/p-women-blazer.png",
+      "description": "A relaxed, double-faced blazer with structured shoulders and deep patch pockets. Wear it as a suit or over denim.",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Cream",
+        "Black"
+      ],
+      "published": true
+    },
+    {
+      "slug": "cashmere-crew-sweater",
+      "name": "Cashmere Crew Sweater",
+      "category": "women",
+      "type": "Knitwear",
+      "price": 145,
+      "compareAt": 180,
+      "image": "/images/p-women-knit.png",
+      "description": "Grade-A Mongolian cashmere knitted into a soft, lightweight crewneck with ribbed trims.",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Sage",
+        "Oatmeal",
+        "Navy"
+      ],
+      "published": true
+    },
+    {
+      "slug": "everyday-leather-tote",
+      "name": "Everyday Leather Tote",
+      "category": "women",
+      "type": "Accessories",
+      "price": 210,
+      "image": "/images/p-women-bag.png",
+      "description": "A roomy vegetable-tanned leather tote with an interior zip pocket. Fits a 14\" laptop and develops a rich patina over time.",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Tan",
+        "Black"
+      ],
+      "published": true
+    },
+    {
+      "slug": "chunky-knit-cardigan",
+      "name": "Chunky Knit Cardigan",
+      "category": "kids",
+      "type": "Knitwear",
+      "price": 48,
+      "image": "/images/p-kids-cardigan.png",
+      "description": "A cosy cotton-blend cardigan with wooden buttons and a slightly longer fit to grow into.",
+      "sizes": [
+        "2Y",
+        "4Y",
+        "6Y",
+        "8Y",
+        "10Y"
+      ],
+      "colors": [
+        "Mustard",
+        "Cream"
+      ],
+      "isNew": true,
+      "published": true
+    },
+    {
+      "slug": "denim-overalls",
+      "name": "Denim Overalls",
+      "category": "kids",
+      "type": "Bottoms",
+      "price": 52,
+      "image": "/images/p-kids-overalls.png",
+      "description": "Soft-washed organic denim overalls with adjustable straps and reinforced knees for adventurous days.",
+      "sizes": [
+        "2Y",
+        "4Y",
+        "6Y",
+        "8Y",
+        "10Y"
+      ],
+      "colors": [
+        "Mid Wash"
+      ],
+      "published": true
+    },
+    {
+      "slug": "striped-cotton-tee",
+      "name": "Striped Cotton Tee",
+      "category": "kids",
+      "type": "Tops",
+      "price": 22,
+      "compareAt": 28,
+      "image": "/images/p-kids-tee.png",
+      "description": "A breton-style tee in heavyweight organic cotton jersey that holds its shape wash after wash.",
+      "sizes": [
+        "2Y",
+        "4Y",
+        "6Y",
+        "8Y",
+        "10Y"
+      ],
+      "colors": [
+        "Navy / Cream"
+      ],
+      "published": true
+    },
+    {
+      "slug": "canvas-play-sneaker",
+      "name": "Canvas Play Sneaker",
+      "category": "kids",
+      "type": "Shoes",
+      "price": 39,
+      "image": "/images/p-kids-shoes.png",
+      "description": "Easy on, easy off canvas sneakers with a hook-and-loop strap and flexible, non-marking sole.",
+      "sizes": [
+        "24",
+        "26",
+        "28",
+        "30",
+        "32"
+      ],
+      "colors": [
+        "Rust"
+      ],
+      "published": true
+    }
+  ],
+  "content": {
+    "announcement": "Free shipping on orders over $100 · 30-day free returns",
+    "heroEyebrow": "Autumn / Winter Collection",
+    "heroTitle": "Made to be worn, loved and handed down.",
+    "heroSubtitle": "Natural fabrics and timeless cuts for men, women and kids.",
+    "heroImage": "/images/hero.png",
+    "heroPrimaryLabel": "Shop the collection",
+    "heroSecondaryLabel": "Shop kids",
+    "heroSecondaryHref": "/shop/kids",
+    "categoriesHeading": "Shop by category",
+    "featuredHeading": "New this season",
+    "perks": [
+      {
+        "title": "Free shipping",
+        "text": "On every order over $100."
+      },
+      {
+        "title": "30-day returns",
+        "text": "Free and easy, no questions asked."
+      },
+      {
+        "title": "Natural materials",
+        "text": "Organic cotton, linen, wool and cashmere."
+      },
+      {
+        "title": "Secure checkout",
+        "text": "Your details are always protected."
+      }
+    ],
+    "footerTagline": "Considered clothing for the whole family. Made from natural materials, designed to last."
+  },
+  "posts": [
+    {
+      "slug": "how-to-care-for-linen",
+      "title": "How to Care for Linen So It Lasts for Years",
+      "excerpt": "Linen gets softer with every wash — if you treat it right. Our studio guide to washing, drying and storing your favourite pieces.",
+      "content": "Linen is one of the oldest fabrics in the world, and one of the most forgiving. With a little care, a good linen shirt will outlast almost anything else in your wardrobe.\n\n## Washing\n\nWash linen on a **cool or lukewarm cycle** (30–40°C) with a gentle, bleach-free detergent. Avoid overloading the machine — linen needs room to move.\n\n- Turn garments inside out to protect the surface\n- Wash darks and lights separately\n- Skip fabric softener; linen softens naturally over time\n\n## Drying\n\nLine drying is best. Shake each piece out and hang it while still slightly damp to reduce creasing. If you must tumble dry, use a low setting and remove items before they're fully dry.\n\n> Wrinkles are part of linen's charm. Embrace a little texture.\n\n## Storing\n\nFold linen loosely and store it somewhere cool and dry. Avoid plastic bags, which trap moisture — a cotton garment bag is ideal.\n\nLooking for a new favourite? Explore our [linen and cotton essentials](/shop).",
+      "coverImage": "/images/blog-linen-care.png",
+      "coverAlt": "Folded linen shirts in cream, oat and sage on a wooden table",
+      "author": "The LOOM Studio",
+      "category": "Care Guides",
+      "tags": [
+        "linen",
+        "care",
+        "sustainability"
+      ],
+      "publishedAt": "2026-10-20",
+      "updatedAt": "2026-10-20",
+      "status": "published",
+      "featured": true
+    },
+    {
+      "slug": "building-a-capsule-wardrobe",
+      "title": "Building a Capsule Wardrobe in Ten Pieces",
+      "excerpt": "Fewer, better things. A practical framework for a wardrobe that works across seasons, occasions and moods.",
+      "content": "A capsule wardrobe isn't about owning less for the sake of it — it's about owning pieces that all work together.\n\n## Start with the foundations\n\nBegin with neutral, versatile basics you reach for every week:\n\n1. A tailored overcoat in camel or charcoal\n2. Two crisp oxford shirts\n3. A fine-gauge knit\n4. Well-fitting chinos or trousers\n5. Clean leather sneakers\n\n## Add character\n\nOnce the foundations are set, introduce one or two pieces with texture or colour — a slubby linen blazer, a printed dress, a soft cardigan.\n\n## Choose quality materials\n\nNatural fibres like **wool, cotton and linen** age beautifully and are easier to repair. Investing in them means you'll replace things far less often.\n\n## Edit regularly\n\nTwice a year, take everything out and ask: *did I wear this?* Donate, repair or rehome what no longer earns its place.",
+      "coverImage": "/images/blog-capsule-wardrobe.png",
+      "coverAlt": "A minimal wardrobe of coats, knits and shirts on a wooden rail",
+      "author": "Maya Chen",
+      "category": "Style Notes",
+      "tags": [
+        "style",
+        "capsule wardrobe",
+        "essentials"
+      ],
+      "publishedAt": "2026-10-12",
+      "updatedAt": "2026-10-12",
+      "status": "published",
+      "featured": false
+    },
+    {
+      "slug": "dressing-kids-for-play",
+      "title": "Dressing Kids for Play: Comfort First",
+      "excerpt": "Soft fabrics, roomy fits and pieces that survive the park. What we look for when designing our kids collection.",
+      "content": "Kids don't sit still, so their clothes shouldn't hold them back.\n\n## Softness matters\n\nWe use **organic cotton** for almost everything in our kids range — it's breathable, gentle on sensitive skin and gets softer with every wash.\n\n## Built to move\n\nLook for elasticated waists, gusseted knees and relaxed cuts that leave room to climb, run and tumble.\n\n## Made to be handed down\n\nReinforced seams and durable hardware mean our pieces can be passed between siblings and friends — the most sustainable garment is one that's already been made.\n\nBrowse the [kids collection](/shop/kids) to see the latest arrivals.",
+      "coverImage": "/images/blog-kids-play.png",
+      "coverAlt": "Children’s cotton clothes and canvas sneakers laid on a wool rug",
+      "author": "The LOOM Studio",
+      "category": "Behind the Seams",
+      "tags": [
+        "kids",
+        "organic cotton"
+      ],
+      "publishedAt": "2026-10-02",
+      "updatedAt": "2026-10-02",
+      "status": "published",
+      "featured": false
+    }
+  ],
+  "blog": {
+    "enabled": true,
+    "title": "Journal",
+    "description": "Stories, styling notes and care guides from the LOOM studio.",
+    "showInNav": true,
+    "showOnHome": true,
+    "homeHeading": "From the journal",
+    "postsPerPage": 9
+  }
+}
